@@ -25,7 +25,7 @@ public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 
     //配置白名单 地址是实体类包地址
     static {
-        ParserConfig.getGlobalInstance().addAccept("com.bean.springcloudcommon.model");
+        ParserConfig.getGlobalInstance().addAccept("com.example.springbootredis.entity");
     }
 
     @Override
@@ -42,7 +42,9 @@ public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
             return null;
         }
         String str = new String(bytes, DEFAULT_CHARSET);
-        return (T) JSON.parseObject(str, clazz);
+        return JSON.parseObject(str, clazz);
     }
+
+
 }
 
