@@ -5,6 +5,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hwy20
@@ -38,13 +40,49 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     }
 
     @Override
+    public long autoIncrement(String key, int increment) {
+        return this.redisTemplate.boundValueOps(key).increment(increment);
+    }
+
+    @Override
+    public long autoDecrement(String key, int decrement) {
+        return this.redisTemplate.boundValueOps(key).increment(decrement);
+    }
+
+
+    @Override
     public void setValue(String key, String value) {
         this.redisTemplate.opsForValue().set(key,value);
     }
 
     @Override
+    public void setValue(String key, String value, long time, TimeUnit unit) {
+        this.redisTemplate.opsForValue().set(key,value,time, unit);
+    }
+
+    @Override
     public String getValue(String key) {
-        return (String) this.redisTemplate.opsForValue().get("key");
+        return (String) this.redisTemplate.opsForValue().get(key);
+    }
+
+    @Override
+    public void putHashValue(String key, String mapKey, String mapValue) {
+        this.redisTemplate.boundHashOps(key).put(mapKey,mapValue);
+    }
+
+    @Override
+    public void putHashValue(String key, Map map) {
+        this.redisTemplate.boundHashOps(key).putAll(map);
+    }
+
+    @Override
+    public Map getHashValue(String key) {
+        return redisTemplate.boundHashOps(key).entries();
+    }
+
+    @Override
+    public Object getValueByHashKey(String key, String hashKey) {
+        return this.redisTemplate.boundHashOps(key).get(hashKey);
     }
 
     @Autowired

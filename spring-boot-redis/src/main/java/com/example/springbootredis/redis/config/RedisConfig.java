@@ -1,5 +1,6 @@
 package com.example.springbootredis.redis.config;
 
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -11,15 +12,14 @@ public class RedisConfig {
 
     @Bean
     public RedisTemplate<String,Object> initRedisTemplate(RedisConnectionFactory redisConnectionFactory ){
-        RedisTemplate<String,Object> redisTemplate = new RedisTemplate<>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        // key采用String序列化方式
-        redisTemplate.setKeySerializer(stringRedisSerializer);
-        //value采用fast-json序列化方式。
-        redisTemplate.setValueSerializer(stringRedisSerializer);
-        redisTemplate.setDefaultSerializer(stringRedisSerializer);
-        redisTemplate.afterPropertiesSet();
+        // 设置键（key）的序列化采用StringRedisSerializer。
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        // 设置值（Hash）的序列化采用fastJson序列化
+        redisTemplate.setHashValueSerializer(new GenericFastJsonRedisSerializer());
         return redisTemplate;
     }
 
