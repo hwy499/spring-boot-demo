@@ -151,5 +151,52 @@ public interface IRedisCommonCommand {
     boolean isNotEmpty(String key, Object hashKey);
 
 
+    /*----------------------Set 类型相关操作------------------------------------*/
+
+    /**
+     * 添加一个到多个set的值
+     * @param name setKey
+     * @param values 1-n 多个值
+     * @return 返回成功添加的个数
+     */
+    long sAdd(String name,Object... values);
+    /**
+     * 获取 key 对应的集合的所有成员
+     * @param key redis-key
+     * @return 所有成员
+     */
+    Set<Object> sMembers(String key);
+
+    /**
+     * 检查 value 是否是 key 对应的集合的成员
+     * @param key redis - key
+     * @param value value
+     * @return true 是 false 否
+     */
+    boolean sisMember(String key,String value);
+    /**
+     * 从集合的右侧（尾部）移除一个成员，并将其返回
+     * @param key redis - key
+     * @return 移除的成员
+     */
+    Object sPop(String key);
+
+    /**
+     * 在 key 对应的集合中删除某些值
+     * @param key redis - key
+     * @param values 要删除的某些值
+     * @return 删除的个数
+     */
+    long sRem(String key,Object... values);
+
+    /**
+     * 获取key对应的集合中元素个数
+     * @param key redis - key
+     * @return key对应的集合中元素个数
+     */
+    long sCard(String key);
+
+
+
 }
 

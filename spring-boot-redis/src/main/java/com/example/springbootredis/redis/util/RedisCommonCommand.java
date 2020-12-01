@@ -107,6 +107,36 @@ public class RedisCommonCommand implements IRedisCommonCommand{
         return this.redisTemplate.boundHashOps(key).hasKey(hashKey);
     }
 
+    @Override
+    public long sAdd(String setKey, Object... values) {
+        return this.redisTemplate.boundSetOps(setKey).add(values);
+    }
+
+    @Override
+    public Set<Object> sMembers(String key) {
+        return this.redisTemplate.boundSetOps(key).members();
+    }
+
+    @Override
+    public boolean sisMember(String key, String value) {
+        return this.redisTemplate.boundSetOps(key).isMember(value);
+    }
+
+    @Override
+    public Object sPop(String key) {
+        return this.redisTemplate.opsForSet().pop(key);
+    }
+
+    @Override
+    public long sRem(String key, Object... values) {
+        return this.redisTemplate.opsForSet().remove(key,values);
+    }
+
+    @Override
+    public long sCard(String key) {
+        return this.redisTemplate.opsForSet().size(key);
+    }
+
 
     @Autowired
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
