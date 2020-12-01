@@ -20,13 +20,9 @@ public class RedisCommonCommand implements IRedisCommonCommand{
 
     private RedisTemplate<String,Object> redisTemplate;
 
-    @Override
-    public boolean delete(String key) {
-        return null == key ?  false: redisTemplate.delete(key);
-    }
 
     @Override
-    public long delete(String... key) {
+    public long del(String... key) {
         if(null == key){
             return 0;
         }

@@ -11,19 +11,13 @@ import java.util.concurrent.TimeUnit;
  * @author hwy20
  */
 public interface IRedisCommonCommand {
-    /**
-     * 删除key
-     *
-     * @param key 要删除的key
-     */
-    boolean delete(String key);
 
     /**
      * 删除key
      *
      * @param key 多个key
      */
-    long delete(String... key);
+    long del(String... key);
 
     /**
      * 判断key是否存在
@@ -155,6 +149,7 @@ public interface IRedisCommonCommand {
 
     /**
      * 添加一个到多个set的值
+     *
      * @param name setKey
      * @param values 1-n 多个值
      * @return 返回成功添加的个数
@@ -168,6 +163,7 @@ public interface IRedisCommonCommand {
     Set<Object> sMembers(String key);
     /**
      * 检查 value 是否是 key 对应的集合的成员
+     *
      * @param key redis - key
      * @param value value
      * @return true 是 false 否
@@ -175,12 +171,14 @@ public interface IRedisCommonCommand {
     boolean sisMember(String key,String value);
     /**
      * 从集合的右侧（尾部）移除一个成员，并将其返回
+     *
      * @param key redis - key
      * @return 移除的成员
      */
     Object sPop(String key);
     /**
      * 在 key 对应的集合中删除某些值
+     *
      * @param key redis - key
      * @param values 要删除的某些值
      * @return 删除的个数
@@ -188,6 +186,7 @@ public interface IRedisCommonCommand {
     long sRem(String key,Object... values);
     /**
      * 获取key对应的集合中元素个数
+     *
      * @param key redis - key
      * @return key对应的集合中元素个数
      */
@@ -196,6 +195,7 @@ public interface IRedisCommonCommand {
     /**
      * 从key对应的集合中随机获取 numbers 个元素
      * 每一位都是随机的
+     *
      * @param key redis - key
      * @param count 要获取几个
      * @return numbers个成员
