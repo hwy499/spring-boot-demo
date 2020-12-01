@@ -137,6 +137,11 @@ public class RedisCommonCommand implements IRedisCommonCommand{
         return this.redisTemplate.opsForSet().size(key);
     }
 
+    @Override
+    public List<Object> sRandMember(String key, long count) {
+        return this.redisTemplate.opsForSet().randomMembers(key,count);
+    }
+
 
     @Autowired
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {

@@ -166,7 +166,6 @@ public interface IRedisCommonCommand {
      * @return 所有成员
      */
     Set<Object> sMembers(String key);
-
     /**
      * 检查 value 是否是 key 对应的集合的成员
      * @param key redis - key
@@ -180,7 +179,6 @@ public interface IRedisCommonCommand {
      * @return 移除的成员
      */
     Object sPop(String key);
-
     /**
      * 在 key 对应的集合中删除某些值
      * @param key redis - key
@@ -188,7 +186,6 @@ public interface IRedisCommonCommand {
      * @return 删除的个数
      */
     long sRem(String key,Object... values);
-
     /**
      * 获取key对应的集合中元素个数
      * @param key redis - key
@@ -196,6 +193,14 @@ public interface IRedisCommonCommand {
      */
     long sCard(String key);
 
+    /**
+     * 从key对应的集合中随机获取 numbers 个元素
+     * 每一位都是随机的
+     * @param key redis - key
+     * @param count 要获取几个
+     * @return numbers个成员
+     */
+    List<Object> sRandMember(String key, long count);
 
 
 }
