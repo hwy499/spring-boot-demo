@@ -109,24 +109,47 @@ public interface IRedisCommonCommand {
 
     /**
      * 通过key获取指定map中hashKey对应的值
+     *
      * @param key     redis中的key
      * @param hashKey hashMap中的key
      * @return key => hashKey对应的值
      */
-    Object getValueByHashKey(String key, String hashKey);
+    Object getValueByHashKey(String key, Object hashKey);
 
     /**
      * 获取所有的hash-key
+     *
      * @param key 要获取的hash的redis key
      * @return hash-key集合
      */
     Set<Object> hashKeys(String key);
+
     /**
      * 获取所有的hash-value
+     *
      * @param key 要获取的hash-value的redis key
-     * @return
+     * @return hash-value List
      */
     List<Object> hashValues(String key);
+
+    /**
+     * 删除redis key对应中的hash key
+     *
+     * @param key      redis key
+     * @param hashKeys 1-n 个 hashKeys
+     * @return 删除结果
+     */
+    long deleteHashKey(String key, Object... hashKeys);
+
+    /**
+     * 判断redis key对应中的hash key是否存在
+     *
+     * @param key     redis key
+     * @param hashKey hashKey
+     * @return true 存在 false 不存在
+     */
+    boolean isNotEmpty(String key, Object hashKey);
+
 
 }
 

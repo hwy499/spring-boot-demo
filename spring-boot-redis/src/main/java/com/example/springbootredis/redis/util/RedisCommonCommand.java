@@ -83,7 +83,7 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     }
 
     @Override
-    public Object getValueByHashKey(String key, String hashKey) {
+    public Object getValueByHashKey(String key, Object hashKey) {
         return this.redisTemplate.boundHashOps(key).get(hashKey);
     }
 
@@ -95,6 +95,16 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     @Override
     public List<Object> hashValues(String key) {
      return this.redisTemplate.boundHashOps(key).values();
+    }
+
+    @Override
+    public long deleteHashKey(String key, Object... hashKeys) {
+        return this.redisTemplate.boundHashOps(key).delete(hashKeys);
+    }
+
+    @Override
+    public boolean isNotEmpty(String key, Object hashKey) {
+        return this.redisTemplate.boundHashOps(key).hasKey(hashKey);
     }
 
 

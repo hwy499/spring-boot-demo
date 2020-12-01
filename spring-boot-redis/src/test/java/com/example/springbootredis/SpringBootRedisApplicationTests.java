@@ -20,7 +20,6 @@ class SpringBootRedisApplicationTests {
 
     @Test
     void contextLoads() {
-
         redisCommonCommand.setValue("name", "1234567");
         String value = redisCommonCommand.getValue("name");
         log.info("key = name的值为：" + value);
@@ -28,23 +27,21 @@ class SpringBootRedisApplicationTests {
         log.info("自增完的数" + res);
         log.info("10s后失效");
         redisCommonCommand.setValue("hwy", "18", 10, TimeUnit.SECONDS);
-
         redisCommonCommand.putHashValue("1", "name", "hwy");
         redisCommonCommand.putHashValue("1", "sex", "nan");
         redisCommonCommand.putHashValue("1", "age", "18");
         HashMap<String, String> map = (HashMap<String, String>) redisCommonCommand.getHashValue("1");
         log.info("map data === " + map);
-
         String name = (String) redisCommonCommand.getValueByHashKey("1", "name");
         log.info("name==========" + name);
-
         Set<Object> hashKeys = redisCommonCommand.hashKeys("1");
         log.info("hashKeys ======== " + hashKeys);
-
         List<Object> hashValues = redisCommonCommand.hashValues("1");
         log.info("hashValues ======= " + hashValues);
-
-
+        long result = redisCommonCommand.deleteHashKey("1","name");
+        log.info("删除key=1中的hashmap中的name的key结果："+result);
+        boolean isEmpty = redisCommonCommand.isNotEmpty("1","name");
+        log.info("redis key = 1 的hash key = sex 的键是否存在: "+isEmpty);
     }
 
 
