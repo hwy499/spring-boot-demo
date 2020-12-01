@@ -5,7 +5,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -84,6 +86,17 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     public Object getValueByHashKey(String key, String hashKey) {
         return this.redisTemplate.boundHashOps(key).get(hashKey);
     }
+
+    @Override
+    public Set<Object> hashKeys(String key) {
+        return this.redisTemplate.boundHashOps(key).keys();
+    }
+
+    @Override
+    public List<Object> hashValues(String key) {
+     return this.redisTemplate.boundHashOps(key).values();
+    }
+
 
     @Autowired
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {

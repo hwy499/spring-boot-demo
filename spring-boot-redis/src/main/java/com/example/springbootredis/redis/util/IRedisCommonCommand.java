@@ -1,7 +1,8 @@
 package com.example.springbootredis.redis.util;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -108,12 +109,24 @@ public interface IRedisCommonCommand {
 
     /**
      * 通过key获取指定map中hashKey对应的值
-     *
      * @param key     redis中的key
      * @param hashKey hashMap中的key
      * @return key => hashKey对应的值
      */
     Object getValueByHashKey(String key, String hashKey);
+
+    /**
+     * 获取所有的hash-key
+     * @param key 要获取的hash的redis key
+     * @return hash-key集合
+     */
+    Set<Object> hashKeys(String key);
+    /**
+     * 获取所有的hash-value
+     * @param key 要获取的hash-value的redis key
+     * @return
+     */
+    List<Object> hashValues(String key);
 
 }
 
