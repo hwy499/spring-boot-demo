@@ -20,7 +20,6 @@ public class RedisCommonCommand implements IRedisCommonCommand{
 
     private RedisTemplate<String,Object> redisTemplate;
 
-
     @Override
     public long del(String... key) {
         if(null == key){
@@ -47,19 +46,18 @@ public class RedisCommonCommand implements IRedisCommonCommand{
         return this.redisTemplate.boundValueOps(key).increment(decrement);
     }
 
-
     @Override
-    public void setValue(String key, String value) {
+    public void set(String key, String value) {
         this.redisTemplate.opsForValue().set(key,value);
     }
 
     @Override
-    public void setValue(String key, String value, long time, TimeUnit unit) {
+    public void set(String key, String value, long time, TimeUnit unit) {
         this.redisTemplate.opsForValue().set(key,value,time, unit);
     }
 
     @Override
-    public String getValue(String key) {
+    public String get(String key) {
         return (String) this.redisTemplate.opsForValue().get(key);
     }
 
@@ -137,7 +135,6 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     public List<Object> sRandMember(String key, long count) {
         return this.redisTemplate.opsForSet().randomMembers(key,count);
     }
-
 
     @Autowired
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {

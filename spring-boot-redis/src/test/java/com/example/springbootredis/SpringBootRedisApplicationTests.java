@@ -17,6 +17,7 @@ class SpringBootRedisApplicationTests {
 
     @Test
     void contextLoads() {
+        redisCommonCommand.sAdd("setKey","何文垚","我是何文垚");
         long size = redisCommonCommand.sCard("setKey");
         log.info("size of setKey is "+size);
         List<Object> randList = redisCommonCommand.sRandMember("setKey",5);

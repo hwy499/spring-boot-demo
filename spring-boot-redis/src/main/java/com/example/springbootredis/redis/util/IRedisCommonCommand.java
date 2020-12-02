@@ -53,7 +53,7 @@ public interface IRedisCommonCommand {
      * @param key 要设置值的key
      * @return
      */
-    void setValue(String key, String value);
+    void set(String key, String value);
 
     /**
      * 设置指定key的值 并设置过期时间
@@ -64,7 +64,7 @@ public interface IRedisCommonCommand {
      * @param unit  时间单位
      * @return
      */
-    void setValue(String key, String value, long time, TimeUnit unit);
+    void set(String key, String value, long time, TimeUnit unit);
 
     /**
      * 获取指定 key 的值
@@ -72,7 +72,7 @@ public interface IRedisCommonCommand {
      * @param key 要获取值的key
      * @return 指定 key 的值
      */
-    String getValue(String key);
+    String get(String key);
     /*----------------------Hash 类型相关操作------------------------------------*/
 
     /**
