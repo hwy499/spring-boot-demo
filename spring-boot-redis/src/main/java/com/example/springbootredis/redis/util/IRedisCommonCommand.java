@@ -73,6 +73,15 @@ public interface IRedisCommonCommand {
      * @return 指定 key 的值
      */
     String get(String key);
+
+    /**
+     * 获取指定key的长度
+     *
+     * @param key 要获取值得key
+     * @return key对应字符串得长度
+     */
+    long strlen(String key);
+
     /*----------------------Hash 类型相关操作------------------------------------*/
 
     /**
@@ -201,6 +210,10 @@ public interface IRedisCommonCommand {
      * @return numbers个成员
      */
     List<Object> sRandMember(String key, long count);
+
+    /*---------------------- ZSet 有序集合类型相关操作------------------------------------*/
+
+
 
 
 }

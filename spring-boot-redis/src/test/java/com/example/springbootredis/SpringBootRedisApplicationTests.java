@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 @Slf4j
@@ -17,11 +17,10 @@ class SpringBootRedisApplicationTests {
 
     @Test
     void contextLoads() {
-        redisCommonCommand.sAdd("setKey","何文垚","我是何文垚");
-        long size = redisCommonCommand.sCard("setKey");
-        log.info("size of setKey is "+size);
-        List<Object> randList = redisCommonCommand.sRandMember("setKey",5);
-        log.info("rand List is "+randList);
+        redisCommonCommand.set("ecologyToken","hwy..123456");
+        redisCommonCommand.set("token","123ad1ad1as2d1asd1asd",100, TimeUnit.MINUTES);
+        String ecologyToken = redisCommonCommand.get("ecologyToken");
+        log.info("ecologyToken::",ecologyToken);
     }
 
 

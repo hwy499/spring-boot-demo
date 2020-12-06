@@ -62,6 +62,11 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     }
 
     @Override
+    public long strlen(String key) {
+        return this.redisTemplate.opsForValue().size(key);
+    }
+
+    @Override
     public void putHashValue(String key, String mapKey, String mapValue) {
         this.redisTemplate.boundHashOps(key).put(mapKey,mapValue);
     }
@@ -135,6 +140,10 @@ public class RedisCommonCommand implements IRedisCommonCommand{
     public List<Object> sRandMember(String key, long count) {
         return this.redisTemplate.opsForSet().randomMembers(key,count);
     }
+
+
+
+
 
     @Autowired
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
