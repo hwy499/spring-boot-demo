@@ -1,14 +1,11 @@
 package com.example.rabbitmq.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *  rabbitMQ配置类
+ * RabbitMQ配置类
  */
 @Configuration
 public class RabbitMQConfig {
@@ -24,18 +21,18 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public FanoutExchange fanoutExchange() {
+    public TopicExchange topicExchange() {
         // 创建一个交换机
-        return new FanoutExchange("fanoutExchange");
+        return new TopicExchange("hello.exchange.topic");
     }
 
     @Bean
-    Binding bindingExchangeQueue1(Queue queue1, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(queue1).to(fanoutExchange);
+    Binding bindingExchangeQueue1(Queue queue1, TopicExchange topicExchange) {
+        return BindingBuilder.bind(queue1).to(topicExchange).with("hello.queue.1");
     }
 
     @Bean
-    Binding bindingExchangeQueue2(Queue queue2, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(queue2).to(fanoutExchange);
+    Binding bindingExchangeQueue2(Queue queue2, TopicExchange topicExchange) {
+        return BindingBuilder.bind(queue2).to(topicExchange).with("hello.queue.*");
     }
 }

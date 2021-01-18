@@ -1,6 +1,5 @@
-package com.example.rabbitmq;
+package com.example.rabbitmq.producer;
 
-import com.example.rabbitmq.config.RabbitMQConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,9 @@ public class MessageProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void send() {
-        String context = "hi, fanout msg ";
-        log.info("Sender : {}", context);
-        rabbitTemplate.convertAndSend("fanoutExchange", "", context);
+    public void send(String exchange, String routingKey, String msg) {
+        log.info("Sender : {}", msg);
+        rabbitTemplate.convertAndSend(exchange, routingKey, msg);
     }
 
 }
