@@ -1,0 +1,26 @@
+server:
+  port: 8888
+spring:
+  thymeleaf:
+    # 关闭缓存
+    cache: false
+    # 模板编码
+    encoding: utf-8
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    username: yourUserName
+    password: yourPassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/databaseName?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.simplespringbootdemo.entity
+  configuration.map-underscore-to-camel-case: true
+  # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
